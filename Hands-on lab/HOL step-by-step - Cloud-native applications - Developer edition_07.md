@@ -12,12 +12,11 @@ In this task, you will gather the information you need about your Azure Kubernet
 
 1. Configure kubectl to connect to the Kubernetes cluster, replace `<DeploymentID>` with DeploymentID value from lab Environment Details page.
 
-   ```bash
-   az aks get-credentials -a --name fabmedical-<DeploymentID> --resource-group fabmedical-<DeploymentID>
-   ```
-   
-    ![In this screenshot of the console, kubectl get nodes has been typed and run at the command prompt, which produces a list of nodes.](https://github.com/CloudLabs-MCW/MCW-Cloud-native-applications/blob/fix/Hands-on%20lab/local/ex3tsk1-step2.png?raw=true "kubectl get nodes")
-
+    ```bash
+    az aks get-credentials -a --name fabmedical-<DeploymentID> --resource-group fabmedical-<DeploymentID>
+    ```
+    
+   ![In this screenshot of the console, kubectl get nodes has been typed and run at the command prompt, which produces a list of nodes.](https://github.com/CloudLabs-MCW/MCW-Cloud-native-applications/blob/fix/Hands-on%20lab/local/ex3tsk1-step2.png?raw=true "kubectl get nodes")
 
 1. Test that the configuration is correct by running a simple kubectl command to produce a list of nodes:
 
