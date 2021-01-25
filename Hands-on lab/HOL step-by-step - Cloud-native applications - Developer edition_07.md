@@ -8,84 +8,60 @@ In this exercise, you will connect to the Azure Kubernetes Service cluster you c
 
 In this task, you will gather the information you need about your Azure Kubernetes Service cluster to connect to the cluster and execute commands to connect to the Kubernetes management dashboard from cloud shell.
 
-> **Note**: The following tasks should be executed in cloud shell and not the build machine, so disconnect from build machine if still connected.
+> **Note**: The following tasks should be executed in cloud shell and not the build machine, so disconnect from build machine if still connected. Else, open a new cloudshell window.
 
-1. Verify that you are connected to the correct subscription with the following command to show your default subscription:
-
-   ```bash
-   az account show
-   ```
-
-   - If you are not connected to the correct subscription, list your subscriptions and then set the subscription by its id with the following commands (similar to what you did in cloud shell before the lab):
-   
-   ![In this screenshot of the console, kubectl get nodes has been typed and run at the command prompt, which produces a list of nodes.](https://github.com/CloudLabs-MCW/MCW-Cloud-native-applications/blob/fix/Hands-on%20lab/local/ex3tsk1-step1.png?raw=true "kubectl get nodes")
+1. Configure kubectl to connect to the Kubernetes cluster, replace `<DeploymentID>` with DeploymentID value from lab Environment Details page.
 
    ```bash
-   az account list
-   az account set --subscription {id}
-   ```
-
-2. Configure kubectl to connect to the Kubernetes cluster:
-
-   ```bash
-   az aks get-credentials -a --name fabmedical-SUFFIX --resource-group fabmedical-SUFFIX
+   az aks get-credentials -a --name fabmedical-<DeploymentID> --resource-group fabmedical-<DeploymentID>
    ```
    
     ![In this screenshot of the console, kubectl get nodes has been typed and run at the command prompt, which produces a list of nodes.](https://github.com/CloudLabs-MCW/MCW-Cloud-native-applications/blob/fix/Hands-on%20lab/local/ex3tsk1-step2.png?raw=true "kubectl get nodes")
 
 
-3. Test that the configuration is correct by running a simple kubectl command to produce a list of nodes:
+1. Test that the configuration is correct by running a simple kubectl command to produce a list of nodes:
 
    ```bash
    kubectl get nodes
+   
    ```
 
    ![In this screenshot of the console, kubectl get nodes has been typed and run at the command prompt, which produces a list of nodes.](media/image75.png "kubectl get nodes")
 
-4. Since the AKS cluster uses RBAC, a `ClusterRoleBinding` must be created before you can correctly access the dashboard. To create the required binding, execute the command below:
+1. Since the AKS cluster uses RBAC, a `ClusterRoleBinding` must be created before you can correctly access the dashboard. To create the required binding, execute the command below:
 
    ```bash
    kubectl create clusterrolebinding kubernetes-dashboard --clusterrole=cluster-admin --serviceaccount=kube-system:kubernetes-dashboard
+   
    ```
    ![In this screenshot of the console, kubectl get nodes has been typed and run at the command prompt, which produces a list of nodes.](https://github.com/CloudLabs-MCW/MCW-Cloud-native-applications/blob/fix/Hands-on%20lab/local/ex3tsk1-step4.png?raw=true "kubectl get nodes")
 
    > **Note**: If you get an error saying `error: failed to create clusterrolebinding: clusterrolebindings.rbac.authorization.k8s.io "kubernetes-dashboard" already exists` just ignore it and move on to the next step.
 
-5. Before you can create an SSH tunnel and connect to the Kubernetes Dashboard, you will need to download the **Kubeconfig** file within Azure Cloud Shell that contains the credentials you will need to authenticate to the Kubernetes Dashboard.
+1. Before you can create an SSH tunnel and connect to the Kubernetes Dashboard, you will need to download the **Kubeconfig** file within Azure Cloud Shell that contains the credentials you will need to authenticate to the Kubernetes Dashboard.
 
     Within the Azure Cloud Shell, use the following command to download the Kubeconfig file:
 
     ```bash
-    download /home/<username>/.kube/config
+    download /home/odl_user/.kube/config
+    
     ```
 
-    Make sure to replace the `<username>` placeholder with your name from the command-line in the Azure Cloud Shell.
-
-    >**Note**: You can find the `<username>` from the first part of the Azure Cloud Shell command-line prompt; such as `<username>@Azure:~$`.
-    >
-    > You can also look in the `/home` directory and so see the directory name that exists within it to find the correct username directory where the Kubeconfig file resides:
-    >
-    > ```bash
-    > ls /home
-    > ```
-    
-    ![In this screenshot of the console, kubectl get nodes has been typed and run at the command prompt, which produces a list of nodes.](https://github.com/CloudLabs-MCW/MCW-Cloud-native-applications/blob/fix/Hands-on%20lab/local/ex3tsk1-step5.png?raw=true "kubectl get nodes")
-
-6. Create an SSH tunnel linking a local port (`8001`) on your cloud shell host to port 443 on the management node of the cluster. Cloud shell will then use the web preview feature to give you remote access to the Kubernetes dashboard. Execute the command below replacing the values as follows:
+1. Create an SSH tunnel linking a local port (`8001`) on your cloud shell host to port 443 on the management node of the cluster. Cloud shell will then use the web preview feature to give you remote access to the Kubernetes dashboard. Execute the command below replacing the values as follows:
 
    > **Note**: After you run this command, it may work at first and later lose its connection, so you may have to run this again to reestablish the connection. If the Kubernetes dashboard becomes unresponsive in the browser this is an indication to return here and check your tunnel or rerun the command.
 
    ```bash
-   az aks browse --name fabmedical-SUFFIX --resource-group fabmedical-SUFFIX
+   az aks browse --name fabmedical-<DeploymentID> --resource-group fabmedical-<DeploymentID>
    ```
 
    ![In this screenshot of the console, the output of the az aks browse command.](media/image76.png "az aks browse command output")
 
-7. If the tunnel is successful, you will see the Kubernetes Dashboard authentication screen. Select the **Kubeconfig** option, select the ellipsis (`...`) button, select the **Kubeconfig** file that was previously downloaded, then select **Sign in**.
+1. If the tunnel is successful, you will see the Kubernetes Dashboard authentication screen. Select the **Kubeconfig** option, select the ellipsis (`...`) button, select the **Kubeconfig** file that was previously downloaded, then select **Sign in**.
 
     ![The screenshot shows the Kubernetes Dashboard authentication prompt.](media/kubernetes-dashboard-kubeconfig-prompt.png "Kubernetes Dashboard authentication prompt")
 
-8. Once authenticated, you will see the Kubernetes management dashboard.
+1. Once authenticated, you will see the Kubernetes management dashboard.
 
    ![This is a screenshot of the Kubernetes management dashboard. Overview is highlighted on the left, and at right, kubernetes has a green check mark next to it. Below that, default-token-s6kmc is listed under Secrets.](media/image77.png "Show services and secrets")
 
@@ -101,12 +77,12 @@ In this task, you will deploy the API application to the Azure Kubernetes Servic
 
 1. From the Kubernetes dashboard, select **Create** in the top right corner.
 
-2. From the Resource creation view, select **Create from form**.
+1. From the Resource creation view, select **Create from form**.
 
 
    - Enter `api` for the App name.
 
-   - Enter `[LOGINSERVER]/content-api` for the Container Image, replacing `[LOGINSERVER]` with your ACR login server, such as `fabmedicalsol.azurecr.io`.
+   - Enter `[LOGINSERVER]/content-api` for the Container Image, replacing `[LOGINSERVER]` with your ACR login server, such as `acr878067.azurecr.io`.
 
    - Set Number of pods to `1`.
 
@@ -116,7 +92,7 @@ In this task, you will deploy the API application to the Azure Kubernetes Servic
 
 ![This is a screenshot of the Deploy a Containerized App dialog box. Specify app details below is selected, and the fields have been filled in with the information that follows. At the bottom of the dialog box is a SHOW ADVANCED OPTIONS link.](https://github.com/CloudLabs-MCW/MCW-Cloud-native-applications/blob/fix/Hands-on%20lab/local/ex3tsk2-step1.png?raw=true "Display Create from form")
 
-3. Select **SHOW ADVANCED OPTIONS**
+1. Select **SHOW ADVANCED OPTIONS**
 
    - Enter `1` for the CPU requirement (cores).
 
@@ -124,27 +100,27 @@ In this task, you will deploy the API application to the Azure Kubernetes Servic
 
    ![In the Advanced options dialog box, the above information has been entered. At the bottom of the dialog box is a Deploy button.](media/image79.png "Show Advanced Options")
 
-4. Select **Deploy** to initiate the service deployment based on the image. This can take a few minutes. In the meantime, you will be redirected to the Overview dashboard. Select the **API** deployment from the **Overview** dashboard to see the deployment in progress.
+1. Select **Deploy** to initiate the service deployment based on the image. This can take a few minutes. In the meantime, you will be redirected to the Overview dashboard. Select the **API** deployment from the **Overview** dashboard to see the deployment in progress.
 
    ![This is a screenshot of the Kubernetes management dashboard. Overview is highlighted on the left, and at right, a red arrow points to the api deployment.](media/image80.png "See the deployment in progress")
 
-5. Kubernetes indicates a problem with the `api` **Replica Set** after some seconds. Select the ellipsis icon, then select **Logs** to investigate.
+1. Kubernetes indicates a problem with the `api` **Replica Set** after some seconds. Select the ellipsis icon, then select **Logs** to investigate.
 
    ![This is a screenshot of the Kubernetes management dashboard that shows an error with the replica set, and ellipse menu with Logs option highlighted.](media/Ex2-Task1.5.png "Investigate logs")
 
-6. The log indicates that the content-api application is once again failing because it cannot find a mongodb api to communicate with. You will resolve this issue by connecting to Cosmos DB.
+1. The log indicates that the content-api application is once again failing because it cannot find a mongodb api to communicate with. You will resolve this issue by connecting to Cosmos DB.
 
    ![This screenshot of the Kubernetes management dashboard shows logs output for the api container.](media/Ex2-Task1.6.png "MongoDB communication error")
 
-7. Open the Azure portal in your browser and navigate to your resource group and find your Cosmos DB resource. Select the Cosmos DB resource to view details.
+1. Open the Azure portal in your browser and navigate to your resource group and find your Cosmos DB resource. Select the Cosmos DB resource to view details.
 
    ![This is a screenshot of the Azure Portal showing the Cosmos DB among existing resources.](https://github.com/CloudLabs-MCW/MCW-Cloud-native-applications/blob/fix/Hands-on%20lab/local/ex3tsk2-step7.png?raw=true "Select CosmosDB resource from list")
 
-8. Under **Quick Start** select the **Node.js** tab and copy the **Node.js 3.0 connection string**.
+1. Under **Quick Start** select the **Node.js** tab and copy the **Node.js 3.0 connection string**.
 
    ![This is a screenshot of the Azure Portal showing the quick start for setting up Cosmos DB with MongoDB API. The copy button is highlighted.](https://github.com/CloudLabs-MCW/MCW-Cloud-native-applications/blob/fix/Hands-on%20lab/local/ex3tsk2-step8.png?raw=true "Capture CosmosDB connection string")
 
-9. Update the provided connection string with a database `contentdb` and a replica set `globaldb`.
+1. Update the provided connection string with a database `contentdb` and a replica set `globaldb`.
 
    > **Note**: Username and password redacted for brevity.
 
@@ -152,11 +128,11 @@ In this task, you will deploy the API application to the Azure Kubernetes Servic
    mongodb://<USERNAME>:<PASSWORD>@fabmedical-<SUFFIX>.documents.azure.com:10255/contentdb?ssl=true&replicaSet=globaldb
    ```
 
-10. To avoid disconnecting from the Kubernetes dashboard, open a **new** Azure Cloud Shell console.
+1. To avoid disconnecting from the Kubernetes dashboard, open a **new** Azure Cloud Shell console.
 
     ![This is a screenshot of the cloud shell window with a red arrow pointing at the "Open new session" button on the toolbar.](media/hol-2019-10-19_06-13-34.png "Open new Azure Cloud Shell console")
 
-11. You will setup a Kubernetes secret to store the connection string and configure the `content-api` application to access the secret. First, you must base64 encode the secret value. Open your Azure Cloud Shell window and use the following command to encode the connection string and then, copy the output.
+1. You will setup a Kubernetes secret to store the connection string and configure the `content-api` application to access the secret. First, you must base64 encode the secret value. Open your Azure Cloud Shell window and use the following command to encode the connection string and then, copy the output.
 
     > **Note**: Double quote marks surrounding the connection string are required to successfully produce the required output.
 
@@ -166,9 +142,9 @@ In this task, you will deploy the API application to the Azure Kubernetes Servic
 
     ![This is a screenshot of the Azure cloud shell window showing the command to create the base64 encoded secret.  The output to copy is highlighted.](media/hol-2019-10-18_07-12-13.png "Show encoded secret")
 
-12. Return to the Kubernetes UI in your browser and select **+ Create**.
+1. Return to the Kubernetes UI in your browser and select **+ Create**.
 
-13. In the **Create from input** tab, update the following YAML with the encoded connection string from your clipboard, paste the YAML data into the create dialog, and choose **Upload**.
+1. In the **Create from input** tab, update the following YAML with the encoded connection string from your clipboard, paste the YAML data into the create dialog, and choose **Upload**.
 
     ```yaml
     apiVersion: v1
@@ -182,24 +158,25 @@ In this task, you will deploy the API application to the Azure Kubernetes Servic
 
     ![This is a screenshot of the Kubernetes management dashboard showing the YAML file for creating a deployment.](media/Ex2-Task1.13.png "Upload YAML data")
 
-14. Scroll down in the Kubernetes dashboard until you can see **Secrets** in the left-hand menu. Select it.
+1. Scroll down in the Kubernetes dashboard until you can see **Secrets** in the left-hand menu. Select it.
 
     ![This is a  screenshot of the Kubernetes management dashboard showing secrets.](media/Ex2-Task1.14.png "Manage Kubernetes secrets")
 
-15. View the details for the **cosmosdb** secret. Select the eyeball icon to show the secret.
+1. View the details for the **cosmosdb** secret. Select the eyeball icon to show the secret.
 
     ![This is a screenshot of the Kubernetes management dashboard showing the value of a secret.](media/Ex2-Task1.15.png "View CosmosDB secret")
 
-16. Next, download the api deployment configuration using the following command in your Azure Cloud Shell window:
+1. Next, download the api deployment configuration using the following command in your Azure Cloud Shell window:
 
     ```bash
     kubectl get -o=yaml deployment api > api.deployment.yml
     ```
 
-17. Edit the downloaded file using cloud shell code editor:
+1. Edit the downloaded file using cloud shell code editor:
 
     ```bash
     code api.deployment.yml
+    
     ```
 
     Add the following environment configuration to the container spec, below the `image` property:
@@ -215,14 +192,15 @@ In this task, you will deploy the API application to the Azure Kubernetes Servic
 
     ![This is a screenshot of the Kubernetes management dashboard showing part of the deployment file.](media/Ex2-Task1.17.png "Edit the api.deployment.yml file")
 
-18. Save your changes and close the editor.
+1. Save your changes and close the editor.
 
     ![This is a screenshot of the code editor save and close actions.](media/Ex2-Task1.17.1.png "Code editor configuration update")
 
-19. Update the api deployment by using `kubectl` to apply the new configuration.
+1. Update the api deployment by using `kubectl` to apply the new configuration.
 
     ```bash
     kubectl apply -f api.deployment.yml
+    
     ```
 
     >**Note**: If you receive an error like `Operation cannot be fulfilled on deployment.apps "api"` then delete the deployment and recreate it using the modified `api.deployment.yml` file.
@@ -230,6 +208,7 @@ In this task, you will deploy the API application to the Azure Kubernetes Servic
       ```bash
       kubectl delete deployment api
       kubectl create -f api.deployment.yml
+      
       ```
 
 20. Select **Deployments** then **api** to view the api deployment. It now has a healthy instance and the logs indicate it has connected to mongodb.
@@ -247,6 +226,7 @@ In this task, deploy the web service using `kubectl`.
 
    ```bash
    code web.deployment.yml
+   
    ```
 
 3. Copy and paste the following text into the editor:
