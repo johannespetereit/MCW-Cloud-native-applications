@@ -10,6 +10,12 @@ In this task, you will gather the information you need about your Azure Kubernet
 
 > **Note**: The following tasks should be executed in cloud shell and not the build machine, so disconnect from build machine if still connected. Else, open a new cloudshell window.
 
+1. Enable the kube-dashboard addon. The kube-dashboard addon is disabled by default on clusters with version K8s 1.18.  Enable the addon by running the following command, replace `<DeploymentID>` with DeploymentID value from lab Environment Details page.
+
+   ```bash
+   az aks enable-addons -g fabmedical-<DeploymentID> -n fabmedical-<DeploymentID> -a kube-dashboard
+   ```
+
 1. Configure kubectl to connect to the Kubernetes cluster, replace `<DeploymentID>` with DeploymentID value from lab Environment Details page.
 
     ```bash
