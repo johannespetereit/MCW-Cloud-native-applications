@@ -66,7 +66,11 @@ In this task, you will create a **Migration project** within Azure Database Migr
 4. On the **MongoDB to Azure Database for CosmosDB Offline Migration Wizard** pane, enter the following values for the **Select source** tab:
 
     - Mode: **Standard mode**
-    - Source server name: Enter the Private IP Address of the Build Agent VM used in this lab.
+    - Source server name: Enter the Private IP Address of the Build Agent VM used in this lab. 
+    > **Note**: To get Private IP of Build Agent VM, in Azure Portal search for and select virtual machines and now in virtual machines blade click on fabmedical, on fabmedical vm page under networking you can find Private IP.
+      
+      ![](media/buildagentip.png)
+      
     - Server port: `27017`
     - Require SSL: Unchecked
 
