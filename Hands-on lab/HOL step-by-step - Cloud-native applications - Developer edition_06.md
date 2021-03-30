@@ -55,6 +55,8 @@ In this task, you will create a **Migration project** within Azure Database Migr
 
 3. On the Azure Database Migration Service blade, select **+ New Migration Project** on the **Overview** pane.
 
+   ![](media/newmigrationproject.png)
+
 4. On the **New migration project** pane, enter the following values, then select **Create and run activity**:
 
     - Project name: `fabmedical`
