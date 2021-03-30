@@ -49,7 +49,7 @@ In this task, you will create a **Migration project** within Azure Database Migr
 
 1. In the Azure Portal, navigate to your Build Agent VM, and copy the Private IP address **(2)**. Paste the contents into the text editor of your choice (such as Notepad on Windows, macOS users can use TextEdit) for future use.
 
-   ![Built Agent VM is shown. Overview tab is open. Private IP address is highlighted.](media/agent-vm-private-ip-address.png "Private IP Address")
+   ![Built Agent VM is shown. Overview tab is open. Private IP address is highlighted.](https://github.com/CloudLabs-MCW/MCW-Cloud-native-applications/blob/master/Hands-on%20lab/media/agent-vm-private-ip-address.png?raw=true "Private IP Address")
 
 2. In the Azure Portal, navigate to the **Azure Database Migration Service** that was previously provisioned.
 
