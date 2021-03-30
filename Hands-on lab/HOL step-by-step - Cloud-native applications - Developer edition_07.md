@@ -43,7 +43,7 @@ In this task, you will deploy the API application to the Azure Kubernetes Servic
 
 1. We first need to define a Service for our API so that the application is accessible within the cluster. In the AKS blade in the Azure Portal select **Services and ingresses** and on the Services tab select **+ Add**.
 
-    ![This is a screenshot of the Azure Portal for AKS showing adding a Service.](media/2021-03-25-17-04-04.png "Add a Service")
+    ![This is a screenshot of the Azure Portal for AKS showing adding a Service.](https://github.com/CloudLabs-MCW/MCW-Cloud-native-applications/blob/master/Hands-on%20lab/media/2021-03-25-17-04-04.png?raw=true "Add a Service")
 
 2. In the **Add with YAML** screen, paste following YAML and choose **Add**.
 
@@ -68,11 +68,11 @@ In this task, you will deploy the API application to the Azure Kubernetes Servic
 
 3. Now select **Workloads** under the **Kubernetes resources** section in the left navigation.
 
-    ![Select workloads under Kubernetes resources.](media/2021-03-25-17-04-35.png "Select workloads under Kubernetes resources")
+    ![Select workloads under Kubernetes resources.](https://github.com/CloudLabs-MCW/MCW-Cloud-native-applications/blob/master/Hands-on%20lab/media/2021-03-25-17-04-35.png?raw=true "Select workloads under Kubernetes resources")
 
 4. From the Workloads view, with **Deployments** selected (the default) then select **+ Add**.
 
-   ![Selecting + Add to create a deployment.](media/2021-03-25-17-05-05.png "Selecing + Add to create a deployment")
+   ![Selecting + Add to create a deployment.](https://github.com/CloudLabs-MCW/MCW-Cloud-native-applications/blob/master/Hands-on%20lab/media/2021-03-25-17-05-05.png?raw=true "Selecing + Add to create a deployment")
 
 5. In the **Add with YAML** screen that loads paste the following YAML and update the `[LOGINSERVER]` placeholder with the name of the ACR instance.
 
@@ -132,17 +132,17 @@ In this task, you will deploy the API application to the Azure Kubernetes Servic
 
 6. Select **Add** to initiate the deployment. This can take a few minutes after which you will see the deployment listed.
 
-   ![Service is showing as unhealthy](media/2021-03-25-17-05-36.png "Service is showing as unhealthy")
+   ![Service is showing as unhealthy](https://github.com/CloudLabs-MCW/MCW-Cloud-native-applications/blob/master/Hands-on%20lab/media/2021-03-25-17-05-36.png?raw=true "Service is showing as unhealthy")
 
 7. Select the **api** deployment to open the Deployment, select **Live logs** and then a Pod from the drop-down. After a few moments the live logs should appear.
 
-   ![Service is showing as unhealthy](media/2021-03-25-17-06-09.png "Service is showing as unhealthy")
+   ![Service is showing as unhealthy](https://github.com/CloudLabs-MCW/MCW-Cloud-native-applications/blob/master/Hands-on%20lab/media/2021-03-25-17-06-09.png?raw=true "Service is showing as unhealthy")
 
    > **Note:** if the logs don't display it may be the Pod no longer exists. You can use the **View in Log Analytics** to view historical logs regardless of Pod.
 
 8. If you scroll through the log you can see it indicates that the content-api application is once again failing because it cannot find a MongoDB api to communicate with. You will resolve this issue by connecting to Cosmos DB.
 
-   ![This screenshot of the Kubernetes management dashboard shows logs output for the api container.](media/2021-03-25-17-07-13.png "MongoDB communication error")
+   ![This screenshot of the Kubernetes management dashboard shows logs output for the api container.](https://github.com/CloudLabs-MCW/MCW-Cloud-native-applications/blob/master/Hands-on%20lab/media/2021-03-25-17-07-13.png?raw=true "MongoDB communication error")
 
 9. In the Azure Portal navigate to your resource group and find your Cosmos DB. Select the Cosmos DB resource to view details.
 
