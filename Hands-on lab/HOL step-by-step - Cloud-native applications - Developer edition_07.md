@@ -146,11 +146,11 @@ In this task, you will deploy the API application to the Azure Kubernetes Servic
 
 9. In the Azure Portal navigate to your resource group and find your Cosmos DB. Select the Cosmos DB resource to view details.
 
-   ![This is a screenshot of the Azure Portal showing the Cosmos DB among existing resources.](media/Ex2-Task1.9.png "Select CosmosDB resource from list")
+   ![This is a screenshot of the Azure Portal showing the Cosmos DB among existing resources.](https://raw.githubusercontent.com/CloudLabs-MCW/MCW-Cloud-native-applications/fix/Hands-on%20lab/local/ex3tsk2-step7.png "Select CosmosDB resource from list")
 
 10. Under **Quick Start** select the **Node.js** tab and copy the **Node.js 3.0 connection string**.
 
-    ![This is a screenshot of the Azure Portal showing the quick start for setting up Cosmos DB with MongoDB API. The copy button is highlighted.](media/Ex2-Task1.10.png "Capture CosmosDB connection string")
+    ![This is a screenshot of the Azure Portal showing the quick start for setting up Cosmos DB with MongoDB API. The copy button is highlighted.](https://raw.githubusercontent.com/CloudLabs-MCW/MCW-Cloud-native-applications/fix/Hands-on%20lab/local/ex3tsk2-step8.png "Capture CosmosDB connection string")
 
 11. Modify the copied connection string by adding the database `contentdb` to the URL, along with a replicaSet of `globaldb`. The resulting connection string should look like the below sample.
 
@@ -417,6 +417,7 @@ You will configure a Helm Chart that will be used to deploy and configure the **
       repository: [LOGINSERVER].azurecr.io/content-web
       pullPolicy: Always
     ```
+    ![In the AKS Services and ingresses blade in the Azure Portal showing the web service selected.](https://raw.githubusercontent.com/CloudLabs-MCW/MCW-Cloud-native-applications/fix/Hands-on%20lab/local/ex3tsk4-step9.png "Web service endpoint")
 
 10. Search for `nameOverride` and `fullnameOverride` entries and update the values so that they match the following:
 
@@ -424,6 +425,8 @@ You will configure a Helm Chart that will be used to deploy and configure the **
     nameOverride: "web"
     fullnameOverride: "web"
     ```
+    ![In the AKS Services and ingresses blade in the Azure Portal showing the web service selected.](https://raw.githubusercontent.com/CloudLabs-MCW/MCW-Cloud-native-applications/fix/Hands-on%20lab/local/ex4stp3-step10.png "Web service endpoint")
+
 
 11. Search for the `service` definition and update the values so that they match the following:
 
@@ -432,6 +435,8 @@ You will configure a Helm Chart that will be used to deploy and configure the **
       type: LoadBalancer
       port: 80
     ```
+    ![In the AKS Services and ingresses blade in the Azure Portal showing the web service selected.](https://raw.githubusercontent.com/CloudLabs-MCW/MCW-Cloud-native-applications/fix/Hands-on%20lab/local/ex4stp3-step11.png "Web service endpoint")
+
 
 12. Search for the `resources` definition and update the values so that they match the following. You are removing the curly braces and adding the `requests` (make sure to remove the {} characters after the `resource:` node):
 
@@ -448,6 +453,7 @@ You will configure a Helm Chart that will be used to deploy and configure the **
         cpu: 1000m
         memory: 128Mi
     ```
+    ![In the AKS Services and ingresses blade in the Azure Portal showing the web service selected.](https://raw.githubusercontent.com/CloudLabs-MCW/MCW-Cloud-native-applications/fix/Hands-on%20lab/local/ex3tsk2-step12.png "Web service endpoint")
 
 13. Save changes and close the editor.
 
@@ -462,6 +468,7 @@ You will configure a Helm Chart that will be used to deploy and configure the **
     ```yaml
     appVersion: latest
     ```
+    ![In the AKS Services and ingresses blade in the Azure Portal showing the web service selected.](https://raw.githubusercontent.com/CloudLabs-MCW/MCW-Cloud-native-applications/fix/Hands-on%20lab/local/ex3tsk2-step15.png "Web service endpoint")
 
 16. We will now update the file named `deployment.yaml`.
 
@@ -485,6 +492,7 @@ You will configure a Helm Chart that will be used to deploy and configure the **
           annotations:
             rollme: {{ randAlphaNum 5 | quote }}
     ```
+    ![In the AKS Services and ingresses blade in the Azure Portal showing the web service selected.](https://raw.githubusercontent.com/CloudLabs-MCW/MCW-Cloud-native-applications/fix/Hands-on%20lab/local/ex3task2-step18.png "Web service endpoint")
 
 18. Search for the `containers` definition and update the values so that they match the following. You are changing the `containerPort`, `livenessProbe` port and adding the `env` variable:
 
@@ -507,6 +515,8 @@ You will configure a Helm Chart that will be used to deploy and configure the **
             path: /
             port: 3000
     ```
+    
+    ![In the AKS Services and ingresses blade in the Azure Portal showing the web service selected.](https://raw.githubusercontent.com/CloudLabs-MCW/MCW-Cloud-native-applications/fix/Hands-on%20lab/local/ex3tsk2-step19.png "Web service endpoint")
 
 19. Save changes and close the editor.
 
@@ -525,6 +535,7 @@ You will configure a Helm Chart that will be used to deploy and configure the **
         protocol: TCP
         name: http
     ```
+    ![In this screenshot of the console, helm install web ./web has been typed and run at the command prompt. Messages about web deployment and web service creation appear below.](https://raw.githubusercontent.com/CloudLabs-MCW/MCW-Cloud-native-applications/fix/Hands-on%20lab/local/ex3tsk2-step22.png "ports")
 
 22. Save changes and close the editor.
 
@@ -685,7 +696,7 @@ In this task, you will access and review the various logs and dashboards made av
 
 1. From the Azure Portal, select the resource group you created named `fabmedical-SUFFIX`, and then select your `Kubernetes Service` Azure resource.
 
-   ![In this screenshot, the resource group was previously selected and the AKS cluster is selected.](media/Ex2-Task8.1.png "Select fabmedical resource group")
+   ![In this screenshot, the resource group was previously selected and the AKS cluster is selected.](https://raw.githubusercontent.com/CloudLabs-MCW/MCW-Cloud-native-applications/fix/Hands-on%20lab/local/ex3tsk7-step1.png "Select fabmedical resource group")
 
 2. From the Monitoring blade, select **Insights**.
 
