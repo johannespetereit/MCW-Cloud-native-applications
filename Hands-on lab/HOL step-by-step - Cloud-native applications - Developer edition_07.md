@@ -389,10 +389,11 @@ You will configure a Helm Chart that will be used to deploy and configure the **
 6. Clone your fabmedical repository (replace URL with URL of your repository):
 
     ```bash
+    cd clouddrive
     git clone https://github.com/USER_NAME/fabmedical.git
     ```
 
-7. We will use the `helm create` command to scaffold out a chart implementation that we can build on. Use the following commands to create a new chart named `web` in a new directory (replace 'fabmedical' with the directory created by your clone):
+7. We will use the `helm create` command to scaffold out a chart implementation that we can build on. Use the following commands to create a new chart named `web` in a new directory (`replace 'fabmedical' with the directory created by your clone`):
 
     ```bash
     cd fabmedical
@@ -559,7 +560,7 @@ In this task, you will use GitHub Actions workflows to automate the process for 
 1. Navigate to the `.github/workflows` folder of the git repository, and open the `content-web.yml` workflow using `vi`:
 
     ```bash
-    cd ~/MCW-Cloud-native-applications/Hands-on\ lab/lab-files/developer/.github/workflows
+    cd ~/clouddrive/MCW-Cloud-native-applications/Hands-on\ lab/lab-files/developer/.github/workflows
     vi content-web.yml
     ```
 
