@@ -35,16 +35,18 @@ In this task, you will modify the CPU requirements for the web service so that i
 1. Re-open the JSON view for the web deployment and then find the **cpu** resource requirements for the web container. Change this value to `125m`.
 
    ![This is a screenshot of the Edit a Deployment dialog box with various displayed information about ports, env, and resources. The resources node, with cpu: 125m selected, is highlighted.](media/2021-03-26-18-24-06.png "Change cpu value")
+   
+2. In the same JSON tab, find the port resource under readinessProbe and update it to 3000.
 
-2. Select **Review + save**, confirm the change and then select **Save** to update the deployment.
+3. Select **Review + save**, confirm the change and then select **Save** to update the deployment.
 
-3. From the navigation menu, select **Replica Sets** under **Workloads**. From the view's Replica Sets list select the web replica set.
+4. From the navigation menu, select **Replica Sets** under **Workloads**. From the view's Replica Sets list select the web replica set.
 
-4. When the deployment update completes, four web pods should be shown in running state.
+5. When the deployment update completes, four web pods should be shown in running state.
 
    ![Four web pods are listed in the Pods box, and all have green check marks and are listed as Running.](media/2021-03-26-18-24-35.png "Four pods running")
 
-5. Return to the browser tab with the sample web application loaded. Refresh the stats page at /stats to watch the display update to reflect the different api pods by observing the host name refresh.
+6. Return to the browser tab with the sample web application loaded. Refresh the stats page at /stats to watch the display update to reflect the different api pods by observing the host name refresh.
 
 ### Task 3: Perform a rolling update
 
