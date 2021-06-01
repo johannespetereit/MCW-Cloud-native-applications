@@ -4,7 +4,7 @@ name: content-api
 on:
   push:
     branches:
-    - master
+    - main
     paths:
     - 'content-api/**'
 
@@ -20,7 +20,7 @@ env:
   dockerfilePath: './content-api'
   tag: '${{ github.run_id  }}'
 
-# Jobs define the actions that take place when code is pushed to the master branch
+# Jobs define the actions that take place when code is pushed to the main branch
 jobs:
 
   build-and-publish-docker-image:
