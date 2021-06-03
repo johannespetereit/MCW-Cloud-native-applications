@@ -4,7 +4,7 @@ name: content-init
 on:
   push:
     branches:
-    - main
+    - master
     paths:
     - 'content-init/**'
 
