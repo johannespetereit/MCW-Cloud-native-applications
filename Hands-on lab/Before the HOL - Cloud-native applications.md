@@ -28,7 +28,6 @@ The names of manufacturers, products, or URLs are provided for informational pur
   - [Overview](#overview)
   - [Requirements](#requirements)
   - [Before the hands-on lab](#before-the-hands-on-lab)
-    - [Task 1: Set up Azure Cloud Shell](#task-1-set-up-azure-cloud-shell)
     - [Task 2: Download Starter Files](#task-2-download-starter-files)
     - [Task 3: Create a GitHub repository](#task-3-create-a-github-repository)
     - [Task 4: Set up Azure Cloud Shell environment](#task-4-set-up-azure-cloud-shell-environment)
@@ -51,38 +50,6 @@ Before the hands-on lab, you will need to prepare the environment by deploying t
 **Duration**: 60 minutes
 
 You should follow all the steps provided in this section _before_ taking part in the hands-on lab ahead of time as some of these steps take time.
-
-### Task 1: Set up Azure Cloud Shell
-
-1. Open a cloud shell by selecting the cloud shell icon in the menu bar.
-
-   ![The cloud shell icon is highlighted on the menu bar.](media/b4-image35.png "Cloud Shell")
-
-2. The cloud shell opens in the browser window. Choose **Bash** if prompted or use the left-hand dropdown on the shell menu bar to choose **Bash** from the dropdown (as shown). If prompted, select **Confirm**.
-
-   ![This is a screenshot of the cloud shell opened in a browser window. Bash was selected.](media/b4-image36.png "Cloud Shell Bash Window")
-
-3. Make sure to set your default subscription correctly. To view your current subscription type:
-
-   ```bash
-   az account show
-   ```
-
-   ![In this screenshot of a Bash window, az account show has been typed and run at the command prompt. Some subscription information is visible in the window, and some information is obscured.](media/b4-image37.png "Bash Shell AZ Account Show")
-
-4. If the subscription displayed in the previous step is not the subscription you plan on using for this workshop, you will need to set the current subscription to your desired subscription. To set your default subscription to something other than the current selection, type the following, replacing {id} with the desired subscription id value:
-
-   ```bash
-   az account set --subscription {id}
-   ```
-
-   > **Note**: If you do not know the id of your desired subscription, you can list the subscriptions available to you along with their ids via the following command:
-
-   ```bash
-   az account list
-   ```
-
-   ![In this screenshot of a Bash window, az account list has been typed and run at the command prompt. Some subscription information is visible in the window, and some information is obscured.](media/b4-image38.png "Bash AZ Account List")
 
 ### Task 2: Download Starter Files
 
