@@ -60,6 +60,19 @@ You should follow all the steps provided in this section _before_ taking part in
 
    ![This is a screenshot of the cloud shell opened in a browser window. Bash was selected.](media/b4-image36.png "Cloud Shell Bash Window")
 
+
+3. An error message may appear:
+   ```
+   {"error":{"code":"AuthorizationFailed","message":"The client '[user]@aiw.cloudlabs.ai' with object id [id] does not have authorization to perform action 'Microsoft.Resources/subscriptions/resourcegroups/read' over scope '/subscriptions/[id]/resourcegroups/cloud-shell-storage-southcentralus' or the scope is invalid. If access was recently granted, please refresh your credentials."}}
+   ```
+   If the error message doesn't appear, continue with [Task 2: Download Starter Files](#task-2-download-starter-files)
+
+4. Click **Show advanced settings** located under the error message
+   - For **Subscription**, **Location** and **Resource group**, leave the default value
+   - For **Storage Account**, select **Create new** and enter a unique name. The name must be globally unique, and doesn't matter. You will not need to remember it.
+   - For **File Share** select **Create new** and enter `cloudshell`
+   - Click **Create storage**
+
 ### Task 2: Download Starter Files
 
 > **Note**: You will need access to your Azure subscription via Azure Cloud Shell to proceed further in the workshop.  If you don't have a cloud shell available, refer back to [Task 1: Set up Azure Cloud Shell](#task-1-set-up-azure-cloud-shell) for set up instructions.
