@@ -44,11 +44,7 @@ Microsoft and the trademarks listed at https://www.microsoft.com/en-us/legal/int
     - [Task 1: Increase service instances from the Azure Portal](#task-1-increase-service-instances-from-the-azure-portal)
     - [Task 2: Resolve failed provisioning of replicas](#task-2-resolve-failed-provisioning-of-replicas)
     - [Task 3: Restart containers and test HA](#task-3-restart-containers-and-test-ha)
-    - [Task 4: Configure Cosmos DB Autoscale](#task-4-configure-cosmos-db-autoscale)
-    - [Task 5: Test Cosmos DB Autoscale](#task-5-test-cosmos-db-autoscale)
   - [Exercise 4: Working with services and routing application traffic](#exercise-4-working-with-services-and-routing-application-traffic)
-    - [Task 1: Update an external service to support dynamic discovery with a load balancer](#task-1-update-an-external-service-to-support-dynamic-discovery-with-a-load-balancer)
-    - [Task 2: Adjust CPU constraints to improve scale](#task-2-adjust-cpu-constraints-to-improve-scale)
     - [Task 3: Perform a rolling update](#task-3-perform-a-rolling-update)
   - [After the hands-on lab](#after-the-hands-on-lab)
 
@@ -66,13 +62,13 @@ At the conclusion of this lab, you have a solid understanding of how to build an
 
 The lab assumes some basic knowledge of Docker containers and Kubernetes. The following modules on Microsoft Learn would be helpful:
 
-| Description | URL |
-|-|-|
+| Description                       | URL                                                                              |
+| --------------------------------- | -------------------------------------------------------------------------------- |
 | Introduction to Docker Containers | https://docs.microsoft.com/en-us/learn/modules/intro-to-docker-containers/       |
-| Introduction to Containers | https://docs.microsoft.com/en-us/learn/modules/intro-to-containers/              |
-| Build and Store Container Images| https://docs.microsoft.com/en-us/learn/modules/build-and-store-container-images/ |
-| Introduction to Kubernetes | https://docs.microsoft.com/en-us/learn/modules/intro-to-kubernetes/              |
-|||
+| Introduction to Containers        | https://docs.microsoft.com/en-us/learn/modules/intro-to-containers/              |
+| Build and Store Container Images  | https://docs.microsoft.com/en-us/learn/modules/build-and-store-container-images/ |
+| Introduction to Kubernetes        | https://docs.microsoft.com/en-us/learn/modules/intro-to-kubernetes/              |
+|                                   |                                                                                  |
 
 Completion of the steps outlined in the [Before the HOL - Cloud-native applications](Before%20the%20HOL%20-%20Cloud-native%20applications.md) document is required before undertaking any of the exercises in this lab.
 
@@ -164,7 +160,8 @@ This task will deploy an instance of the Azure Database Migration Service used t
 
 9. Select **Create** to create the Azure Database Migration Service instance.
 
-It may take 5 to 10 minutes to provision the Azure Database Migration Service instance.
+It may take up to 20 minutes to provision the Azure Database Migration Service instance.
+This would be a good point to [Setup your Github account as outlined in the Before the lab Document](Before%20the%20HOL%20-%20Cloud-native%20applications.md)
 
 ### Task 3: Migrate data to Azure Cosmos DB
 
@@ -192,7 +189,7 @@ In this task, you will create a **Migration project** within Azure Database Migr
 5. On the **MongoDB to Azure Database for CosmosDB Offline Migration Wizard** pane, enter the following values for the **Select source** tab:
 
     - **Mode**: Standard mode
-    - **Source server name**: Enter the Private IP Address of the Build Agent VM used in this lab.
+    - **Source server name**: Enter the Private IP Address you copied in step 1.
     - **Server port**: 27017
     - **Require SSL**: Unchecked
 
@@ -216,27 +213,27 @@ In this task, you will create a **Migration project** within Azure Database Migr
 
 8. Select **Next: Database setting >>**.
 
-10. On the **Database setting** tab, select the `contentdb` **Source Database** so this database from MongoDB will be migrated to Azure Cosmos DB.
+9. On the **Database setting** tab, select the `contentdb` **Source Database** so this database from MongoDB will be migrated to Azure Cosmos DB.
 
     ![The screenshot shows the Database setting tab with the contentdb source database selected.](media/dms-database-setting.png "Database setting tab")
 
-11. Select **Next: Collection setting >>**.
+10. Select **Next: Collection setting >>**.
 
-12. On the **Collection setting** tab, expand the **contentdb** database, and ensure both the **sessions** and **speakers** collections are selected for migration. Also, update the **Throughput (RU/s)** to `400` for both collections.
+11. On the **Collection setting** tab, expand the **contentdb** database, and ensure both the **sessions** and **speakers** collections are selected for migration. Also, update the **Throughput (RU/s)** to `400` for both collections.
 
     ![The screenshot shows the Collection setting tab with both sessions and speakers collections selected with Throughput RU/s set to 400 for both collections.](media/dms-collection-setting.png "Throughput RU")
 
-13. Select **Next: Migration summary >>**.
+12. Select **Next: Migration summary >>**.
 
-14. On the **Migration summary** tab, enter `MigrateData` in the **Activity name** field, then select **Start migration** to initiate the migration of the MongoDB data to Azure Cosmos DB.
+13. On the **Migration summary** tab, enter `MigrateData` in the **Activity name** field, then select **Start migration** to initiate the migration of the MongoDB data to Azure Cosmos DB.
 
     ![The screenshot shows the Migration summary is shown with MigrateData entered in the Activity name field.](media/dms-migration-summary.png "Migration summary")
 
-15. The status for the migration activity will be shown. The migration will only take a few seconds to complete. Select **Refresh** to reload the status to ensure it shows a **Status** of **Complete**.
+14. The status for the migration activity will be shown. The migration will only take a few seconds to complete. Select **Refresh** to reload the status to ensure it shows a **Status** of **Complete**.
 
     ![The screenshot shows the MigrateData activity showing the status has completed.](media/dms-migrate-complete.png "MigrateData activity completed")
 
-16. Navigate to the **Cosmos DB Account** for the lab within the Azure Portal to verify the data was migrated, then select the **Data Explorer**. You will see the `speakers` and `sessions` collections listed within the `contentdb` database, and you will be able to explore the documents within.
+15. Navigate to the **Cosmos DB Account** for the lab within the Azure Portal to verify the data was migrated, then select the **Data Explorer**. You will see the `speakers` and `sessions` collections listed within the `contentdb` database, and you will be able to explore the documents within.
 
     ![The screenshot shows the Cosmos DB is open in the Azure Portal with Data Explorer open showing the data has been migrated.](media/dms-confirm-data-in-cosmosdb.png "Cosmos DB is open")
 
@@ -250,28 +247,13 @@ In this exercise, you will connect to the Azure Kubernetes Service cluster you c
 
 This task will gather the information you need about your Azure Kubernetes Service cluster to connect to the cluster and execute commands to connect to the Kubernetes management dashboard from the cloud shell.
 
-> **Note**: The following tasks should be executed in cloud shell and not the build agent VM, so disconnect from build agent VM if still connected.
-
-1. Verify that you are connected to the correct subscription with the following command to show your default subscription:
-
-   ```bash
-   az account show
-   ```
-
-   - Ensure you are connected to the correct subscription. List your subscriptions and then set the subscription by its id with the following commands (similar to what you did in cloud shell before the lab):
-
-   ```bash
-   az account list
-   az account set --subscription {id}
-   ```
-
-2. Configure kubectl to connect to the Kubernetes cluster:
+1. Configure kubectl to connect to the Kubernetes cluster:
 
    ```bash
    az aks get-credentials -a --name fabmedical-SUFFIX --resource-group fabmedical-SUFFIX
    ```
 
-3. Test that the configuration is correct by running a simple kubectl command to produce a list of nodes:
+2. Test that the configuration is correct by running a simple kubectl command to produce a list of nodes:
 
    ```bash
    kubectl get nodes
@@ -846,82 +828,6 @@ This task will restart containers and validate that the restart does not impact 
 
     ![Replica Sets is selected under Workloads in the navigation menu on the left. On the right are the Details and Pods boxes. Only one API host name, which has a green check mark and is listed as running, appears in the Pods box.](media/2021-03-26-17-32-24.png "View replica details")
 
-### Task 4: Configure Cosmos DB Autoscale
-
-This task will set up Autoscaling on Azure Cosmos DB.
-
-1. In the Azure Portal, navigate to the `fabmedical-[SUFFIX]` **Azure Cosmos DB Account**.
-
-2. Select **Data Explorer**.
-
-3. Within **Data Explorer**, expand the `contentdb` database, then expand the `sessions` collection.
-
-4. Under the `sessions` collection, select **Scale & Settings**.
-
-5. On the **Scale & Settings**, select **Autoscale** for the **Throughput** setting under **Scale**.
-
-    ![The screenshot displays Cosmos DB Scale and Settings tab with Autoscale selected](media/cosmosdb-autoscale.png "CosmosDB collection scale and settings")
-
-6. Select **Save**.
-
-7. Perform the same operation on the `speakers` collection to enable **Autoscale** on it.
-
-### Task 5: Test Cosmos DB Autoscale
-
-This task will run a performance test script that will test the Autoscale feature of Azure Cosmos DB so you can see that it will now scale greater than 400 RU/s.
-
-1. In the Azure Portal, navigate to the `fabmedical-[SUFFIX]` **Cosmos DB account**.
-
-2. Select **Connection String** under **Settings**.
-
-3. On the **Connection String** pane, copy the **HOST**, **USERNAME**, and **PRIMARY PASSWORD** values from the **Read-write Keys** selector. Save these for use later.
-
-    ![The Cosmos DB account Connection String pane with the fields to copy highlighted.](media/cosmos-connection-string-pane.png "View CosmosDB connection string")
-
-    >**Note**: In your Cosmos DB account, you may see that the host endpoint uses `.mongo.cosmos.azure.com`, which is for version 3.6 of Mongo DB. The endpoint shown here is `.documents.azure.com`, which is for version 3.2 of Mongo DB. You can use either endpoint for the purposes of this Task. If you are curious about the new features added to version 3.6 (that do not affect the application in this lab), consult [this](https://devblogs.microsoft.com/cosmosdb/upgrade-your-server-version-from-3-2-to-3-6-for-azure-cosmos-db-api-for-mongodb/) post.
-
-4. Open the Azure Cloud Shell, and **SSH** to the **Build agent VM**.
-
-5. On the **Build agent VM**, navigate to the `~/Fabmedical` directory.
-
-    ```bash
-    cd ~/Fabmedical
-    ```
-
-6. Run the following command to open the `perftest.sh` script for editing in Vi.
-
-    ```bash
-    vi perftest.sh
-    ```
-
-7. There are several variables declared at the top of the `perftest.sh` script. Modify the **host**, **username**, and **password** variables by setting their values to the corresponding Cosmos DB Connection String values that were copied previously.
-
-    ![The screenshot shows Vim with perftest.sh file open and variables set to Cosmos DB Connection String values.](media/cosmos-perf-test-variables.png "Modify the connection information in Vim")
-
-    > Press `i` on your keyboard to enter insert mode, where you can alter the file.
-
-8. Save the file and exit Vim.
-
-    > You can do this by pressing the `Esc` key on your keyboard, followed by `:wq`.
-
-9. Run the following command to execute the `perftest.sh` script to run a small load test against Cosmos DB. This script will consume RU's in Cosmos DB by inserting many documents into the Sessions container.
-
-    ```bash
-    bash ./perftest.sh
-    ```
-
-    > **Note:** The script will take a minute to complete executing.
-
-10. Once the script has completed, navigate back to the **Cosmos DB account** in the Azure portal.
-
-11. Scroll down on the **Overview** pane of the **Cosmos DB account** blade and locate the **Request Charge** graph.
-
-    > **Note:** It may take 2 - 5 minutes for the activity on the Cosmos DB collection to appear in the activity log. Wait a few minutes and refresh the pane if the recent Request charge doesn't show up immediately.
-
-12. Notice that the **Request charge** now shows there was activity on the **Cosmos DB account** that exceeded the 400 RU/s limit that was previously set before Autoscale was turned on.
-
-    ![The screenshot shows the Cosmos DB request charge graph showing recent activity from performance test](media/cosmos-request-charge.png "Recent CosmosDB activity graph")
-
 ## Exercise 4: Working with services and routing application traffic
 
 **Duration**: 120 minutes
@@ -929,44 +835,6 @@ This task will run a performance test script that will test the Autoscale featur
 In the previous exercise, we restricted the scale properties of the service. This exercise will configure the api deployments to create pods that use dynamic port mappings to eliminate the port resource constraint during scale activities.
 
 Kubernetes services can discover the ports assigned to each pod, allowing you to run multiple pod instances on the same agent node --- something that is not possible when you configure a specific static port (such as 3001 for the API service).
-
-### Task 1: Update an external service to support dynamic discovery with a load balancer
-
-In this task, you will update the web service to support dynamic discovery through an Azure load balancer.
-
-1. From AKS **Kubernetes resources** menu, select **Deployments** under **Workloads**. From the list, select the **web** deployment.
-
-2. Select **YAML**, then select the **JSON** tab.
-
-3. Locate the replicas node and update the required count to a value of `4`.
-
-4. Next, scroll to the web containers spec as shown in the screenshot. Remove the hostPort entry for the web container's port mapping.
-
-   ![This is a screenshot of the Edit a Deployment dialog box with various displayed information about spec, containers, ports, and env. The ports node, containerPort: 3001 and protocol: TCP are highlighted, along with the increase to 4 replicas.](media/update-web-deployment.png "Remove web container hostPort entry")
-
-5. Select **Review + save** and then confirm the change and **Save**.
-
-6. Check the status of the scale out by refreshing the web deployment's view. From the navigation menu, select Pods from under Workloads. Select the web pods. You should see an error like that shown in the following screenshot from this view.
-
-    ![Deployments is selected under Workloads in the navigation menu on the left. On the right are the Details and New Replica Set boxes. The web deployment is highlighted in the New Replica Set box, indicating an error.](media/2021-03-26-18-23-38.png "View Pod deployment events")
-
-Like the API deployment, the web deployment used a fixed _hostPort_, and the number of available agent nodes limited your ability to scale. However, after resolving this issue for the web service by removing the _hostPort_ setting, the web deployment cannot scale past two pods due to CPU constraints. The deployment requests more CPU than the web application needs; we will fix this constraint in the next task.
-
-### Task 2: Adjust CPU constraints to improve scale
-
-This task will modify the CPU requirements for the web service to scale out to more instances.
-
-1. Re-open the JSON view for the web deployment and then find the **CPU** resource requirements for the web container. Change this value to `125m`.
-
-    ![This is a screenshot of the Edit a Deployment dialog box with various displayed information about ports, env, and resources. The resources node, with cpu: 125m selected, is highlighted.](media/2021-03-26-18-24-06.png "Change cpu value")
-
-2. Select **Review + save**, confirm the change, and select **Save** to update the deployment.
-
-3. From the navigation menu, select **Replica Sets** under **Workloads**. From the view's Replica Sets list select the web replica set.
-
-4. Observe four web pods in the running state when the deployment update completes.
-
-    ![Four web pods are listed in the Pods box, and all have green check marks and are listed as Running.](media/2021-03-26-18-24-35.png "Four pods running")
 
 ### Task 3: Perform a rolling update
 
