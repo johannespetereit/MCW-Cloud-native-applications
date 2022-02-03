@@ -28,6 +28,7 @@ The names of manufacturers, products, or URLs are provided for informational pur
   - [Overview](#overview)
   - [Requirements](#requirements)
   - [Before the hands-on lab](#before-the-hands-on-lab)
+    - [Task 1: Set up Azure Cloud Shell](#task-1-set-up-azure-cloud-shell)
     - [Task 2: Download Starter Files](#task-2-download-starter-files)
     - [Task 3: Create a GitHub repository](#task-3-create-a-github-repository)
     - [Task 6: Build Docker Images](#task-6-build-docker-images)
@@ -48,6 +49,16 @@ Before the hands-on lab, you will need to prepare the environment by deploying t
 **Duration**: 60 minutes
 
 You should follow all the steps provided in this section _before_ taking part in the hands-on lab ahead of time as some of these steps take time.
+
+### Task 1: Set up Azure Cloud Shell
+
+1. Open a cloud shell by selecting the cloud shell icon in the menu bar.
+
+   ![The cloud shell icon is highlighted on the menu bar.](media/b4-image35.png "Cloud Shell")
+
+2. The cloud shell opens in the browser window. Choose **Bash** if prompted or use the left-hand dropdown on the shell menu bar to choose **Bash** from the dropdown (as shown). If prompted, select **Confirm**.
+
+   ![This is a screenshot of the cloud shell opened in a browser window. Bash was selected.](media/b4-image36.png "Cloud Shell Bash Window")
 
 ### Task 2: Download Starter Files
 
