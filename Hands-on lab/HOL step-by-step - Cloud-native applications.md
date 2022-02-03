@@ -147,7 +147,7 @@ This task will deploy an instance of the Azure Database Migration Service used t
 
     - **Resource group**: Select the Resource Group created with this lab.
     - **Migration service name**: Enter a name, such as `fabmedical[SUFFIX]`.
-    - **Location**: Choose the Azure Region used for the Resource Group.
+    - **Location**: Choose the Azure Region **used for the Resource Group**.
 
     ![The screenshot shows the Create Migration Service Basics tab with all values entered.](media/dms-create-basics.png "Create Migration Basics Tab")
 
@@ -156,6 +156,9 @@ This task will deploy an instance of the Azure Database Migration Service used t
 7. On the **Networking** tab, select the **Virtual Network** within the `fabmedical-[SUFFIX]` resource group.
 
     ![The screenshot shows the Create Migration Service Networking tab with Virtual Network selected.](media/dms-create-networking.png "Create Migration Service Networking tab")
+
+  > **Very important**: If you do not see the VNET, you have selected the wrong location. Open a new Tab for [portal.azure.com](https://portal.azure.com) and go  Go back to **Basics** and select the location the VM is deployed to.
+
 
 8. Select **Review + create**.
 
