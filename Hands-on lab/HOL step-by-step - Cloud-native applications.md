@@ -107,26 +107,6 @@ Each tenant will have the following containers:
 - **Content service**: The API that handles content for the conference, such as speakers, sessions, workshops, and sponsors.
 
 ## Requirements
-
-1. Microsoft Azure subscription must be pay-as-you-go or MSDN.
-
-   - Trial subscriptions will _not_ work.
-
-   - To complete this lab, ensure your account has the following roles:
-
-     - The [Owner](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#owner)
-       built-in role for the Azure Subscription you will use.
-
-     - Is a [Member](https://docs.microsoft.com/azure/active-directory/fundamentals/users-default-permissions#member-and-guest-users) user in the Azure AD tenant you will use. (Guest users will not have the necessary permissions.)
-
-   - You must have enough cores available in your subscription to create the build agent and Azure Kubernetes Service cluster in Before the Hands-on Lab. This lab requires a minimum of eight cores which may demand more cluster resources than your current quota will allow. In such cases, you can request a CPU core quota increase to deploy the AKS cluster.
-
-2. Local machine or a virtual machine configured with:
-
-   - A browser, such as Microsoft Edge or Google Chrome, for consistency with the lab implementation tests.
-
-3. You will install other tools throughout the exercises.
-
 > **Very important**: Make sure to type all the commands as they appear in the guide. Do not try to copy and paste to your command windows or other documents when instructed to enter the information shown in this document, except where explicitly stated in this document. There can be issues with Copy and Paste that result in errors, instructions execution, or file content creation.
 
 ## Exercise 1: Migrate MongoDB to Cosmos DB using Azure Database Migration Service
