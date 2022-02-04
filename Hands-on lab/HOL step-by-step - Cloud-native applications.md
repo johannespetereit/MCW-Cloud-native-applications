@@ -153,7 +153,13 @@ This task will deploy an instance of the Azure Database Migration Service used t
 
     ![The screenshot shows the Create Migration Service Networking tab with Virtual Network selected.](media/dms-create-networking.png "Create Migration Service Networking tab")
 
-  > **Very important**: If you do not see the VNET, you have selected the wrong location. Open a new Tab for [portal.azure.com](https://portal.azure.com) and go  Go back to **Basics** and select the location the VM is deployed to.
+  > **Very important**: If you do not see the VNET, you have selected the wrong location. Open the Cloud shell and execute the following statement:
+
+  ```bash
+  az group list -otable
+  ```
+  You should get one result. Take note of the value for `Location`.
+  Go back to **Basics** and select the location from the statement above.
 
 
 8. Select **Review + create**.
